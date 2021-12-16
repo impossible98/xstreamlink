@@ -1,11 +1,26 @@
 {
   "compilerOptions": {
-    "target": "es2016",
+    "alwaysStrict": true,
+    "declaration": true,
+    "esModuleInterop": true,
+    "incremental": true,
     "module": "commonjs",
+    "noEmitOnError": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "outDir": "./dist",
     "removeComments": true,
-    "esModuleInterop": true,
+    "skipLibCheck": true,
     "strict": true,
-    "skipLibCheck": true
-  }
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
+    "target": "es2015"
+  },
+  "include": [
+    "src"
+  ]
 }
