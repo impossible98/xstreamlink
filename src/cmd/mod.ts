@@ -31,6 +31,14 @@ export async function main() {
                     console.log(value);
                 },
             );
+        } else if (answer.startsWith('https://www.173.com/')) {
+            const __173 = new api._173(answer);
+
+            __173.getStreamLink().then(
+                function(value) {
+                    console.log(value);
+                },
+            );
         } else {
             console.log('链接不合法');
         }
