@@ -1,11 +1,14 @@
 {
   "name": "xstreamlink",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "bin": {
     "xstreamlink": "./dist/main.js"
   },
   "bugs": {
     "url": "https://github.com/impossible98/xstreamlink/issues"
+  },
+  "dependencies": {
+    "axios": "^0.24.0"
   },
   "description": "Show the URL of stream",
   "devDependencies": {
@@ -15,6 +18,9 @@
     "eslint": "^8.0.0",
     "typescript": "^4.0.0"
   },
+  "files": [
+    "dist"
+  ],
   "homepage": "https://github.com/impossible98/xstreamlink",
   "license": "MPL-2.0",
   "main": "./dist/lib.js",

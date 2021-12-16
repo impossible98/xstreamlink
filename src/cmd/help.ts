@@ -10,5 +10,6 @@ export function help() {
         console.log('');
         console.log('  version: show the version');
         console.log('');
+        process.exit(0);
     }
 }
