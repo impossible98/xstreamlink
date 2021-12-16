@@ -1,4 +1,10 @@
-# Template-ts
+# xStreamLink
+
+## Installation
+
+```
+npm install --global xstreamlink
+```
 
 ## Development
 
