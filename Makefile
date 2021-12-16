@@ -1,5 +1,5 @@
 APP_NAME := xStreamLink
-APP_VERSION := 0.2.1
+APP_VERSION := 0.3.0
 BIN_NAME := xstreamlink
 
 SHELL := /bin/bash
@@ -12,6 +12,7 @@ build:
 	npm run dev
 
 commit: fmt
+	npm install
 	node ./scripts/commit.js
 
 dev: lint

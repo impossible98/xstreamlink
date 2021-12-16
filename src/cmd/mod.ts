@@ -23,7 +23,15 @@ export async function main() {
         let answer = await question('请输入直播间链接: ');
         answer = answer.trim();
 
-        if (answer.startsWith('https://www.2cq.com/')) {
+        if (answer.startsWith('https://www.173.com/')) {
+            const __173 = new api._173(answer);
+
+            __173.getStreamLink().then(
+                function(value) {
+                    console.log(value);
+                },
+            );
+        } else if (answer.startsWith('https://www.2cq.com/')) {
             const _2cq = new api._2CQ(answer);
 
             _2cq.getStreamLink().then(
@@ -31,10 +39,10 @@ export async function main() {
                     console.log(value);
                 },
             );
-        } else if (answer.startsWith('https://www.173.com/')) {
-            const __173 = new api._173(answer);
+        } else if (answer.startsWith('https://cc.163.com/')) {
+            const cc = new api.CC(answer);
 
-            __173.getStreamLink().then(
+            cc.getStreamLink().then(
                 function(value) {
                     console.log(value);
                 },
