@@ -8,10 +8,10 @@ class Constants {
     }
 
     async getConstants() {
-        const data = await fs.readFile('Makefile', 'utf8');
-        let appName = data.match(/APP_NAME := (.*)/)[1];
-        let binName = data.match(/BIN_NAME := (.*)/)[1];
-        let version = data.match(/APP_VERSION := (.*)/)[1];
+        const makefileData = await fs.readFile('Makefile', 'utf8');
+        let appName = makefileData.match(/APP_NAME := (.*)/)[1];
+        let binName = makefileData.match(/BIN_NAME := (.*)/)[1];
+        let version = makefileData.match(/APP_VERSION := (.*)/)[1];
         let constants = [appName, binName, version];
 
         return constants;
@@ -19,6 +19,12 @@ class Constants {
 
     async write() {
         const constants = await this.getConstants();
+        const pkgData = await fs.readFile('package.json', 'utf8');
+        const pkg = JSON.parse(pkgData);
+
+        pkg.version = constants[2];
+
+        await fs.writeFile('package.json', JSON.stringify(pkg, null, 2));
 
         await fs.writeFile(
             this.namePath,
