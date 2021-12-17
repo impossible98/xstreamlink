@@ -39,6 +39,14 @@ export async function main() {
                     console.log(value);
                 },
             );
+        } else if (answer.startsWith('https://live.51lm.tv/room/')) {
+            const _51lm = new api._51LM(answer);
+
+            _51lm.getStreamLink().then(
+                function(value) {
+                    console.log(value);
+                },
+            );
         } else if (answer.startsWith('https://cc.163.com/')) {
             const cc = new api.CC(answer);
 
