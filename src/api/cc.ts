@@ -1,5 +1,6 @@
 // Update: 2021-12-17
 // Example: https://cc.163.com/353198106/
+// All: https://cc.163.com/category/live/
 import axios from 'axios';
 
 type Streamlink = {

@@ -1,5 +1,6 @@
 // Update: 2021-12-16
 // Example: https://www.173.com/8
+// All: https://www.173.com/room/category?categoryId=11
 import axios from 'axios';
 
 type Streamlink = {

@@ -1,5 +1,6 @@
 // Update: 2021-12-15
 // Example: https://www.2cq.com/932285
+// All: https://www.2cq.com/
 import axios from 'axios';
 
 type Streamlink = {
