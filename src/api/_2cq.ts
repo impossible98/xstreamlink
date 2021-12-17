@@ -27,20 +27,27 @@ export class _2CQ {
         return this.url.split('/')[3];
     }
 
-    async getStreamLink() {
+    async getResponse() {
         const response = await axios.get(
             `https://www.2cq.com/proxy/room/room/info?roomId=${this.getRoomId()}&appId=1004`,
         );
-        if (response['data']['status'] === 1) {
-            const result = response['data']['result'];
-            if (result['liveState'] === 1) {
+
+        return response.data;
+    }
+
+    async getStreamLink() {
+        const response = await this.getResponse();
+
+        if (response.status === 1) {
+            const result = response.result;
+            if (result.liveState === 1) {
                 streamLink = {
                     state: 0,
                     source: {
-                        origin: result['pullUrl'],
+                        origin: result.pullUrl,
                     },
-                    streamer: result['nickName'],
-                    title: result['notice'],
+                    streamer: result.nickName,
+                    title: result.notice,
                     url: this.url,
                 };
 
@@ -50,6 +57,7 @@ export class _2CQ {
                     state: 1,
                     url: this.url,
                 };
+
                 return JSON.stringify(streamLink, null, 4);
             }
         } else {
@@ -57,6 +65,7 @@ export class _2CQ {
                 state: 1,
                 url: this.url,
             };
+
             return JSON.stringify(streamLink, null, 4);
         }
     }

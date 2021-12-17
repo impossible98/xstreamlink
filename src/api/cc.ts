@@ -27,13 +27,20 @@ export class CC {
         return this.url.split('/')[3];
     }
 
-    async getStreamLink() {
+    async getResponse() {
         const response = await axios.get(
             `https://api.cc.163.com/v1/activitylives/anchor/lives?anchor_ccid=${this.getRoomId()}`,
         );
 
-        if (response.data.data) {
-            const data = response.data.data;
+        return response.data;
+    }
+
+    async getStreamLink() {
+        const response = await this.getResponse();
+
+        if (response.data) {
+            const data = response.data;
+
             if (data[this.getRoomId()].channel_id) {
                 const channelId = data[this.getRoomId()].channel_id;
                 const response2 = await axios.get(`https://cc.163.com/live/channel/?channelids=${channelId}`);
@@ -52,6 +59,7 @@ export class CC {
                     state: 1,
                     url: this.url,
                 };
+
                 return JSON.stringify(streamLink, null, 4);
             }
         } else {
@@ -59,6 +67,7 @@ export class CC {
                 state: 1,
                 url: this.url,
             };
+
             return JSON.stringify(streamLink, null, 4);
         }
     }

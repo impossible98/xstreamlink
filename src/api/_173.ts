@@ -27,7 +27,7 @@ export class _173 {
         return this.url.split('/')[3];
     }
 
-    async getStreamLink() {
+    async getResponse() {
         const response = await axios.get(`https://www.173.com/room/getVieoUrl`, {
             params: {
                 roomId: this.getRoomId(),
@@ -35,8 +35,14 @@ export class _173 {
             },
         });
 
-        if (response.data.data) {
-            const data = response.data.data;
+        return response.data;
+    }
+
+    async getStreamLink() {
+        const response = await this.getResponse();
+
+        if (response.data) {
+            const data = response.data;
 
             if (data.status === 2) {
                 streamLink = {
@@ -46,6 +52,8 @@ export class _173 {
                     },
                     url: this.url,
                 };
+
+                return JSON.stringify(streamLink, null, 4);
             } else {
                 streamLink = {
                     state: 1,
@@ -54,7 +62,6 @@ export class _173 {
 
                 return JSON.stringify(streamLink, null, 4);
             }
-            return JSON.stringify(streamLink, null, 4);
         } else {
             streamLink = {
                 state: 1,
