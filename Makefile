@@ -12,7 +12,6 @@ build:
 	npm run dev
 
 commit: fmt
-	npm install
 	node ./scripts/commit.js
 
 dev: lint
