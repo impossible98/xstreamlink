@@ -15,8 +15,7 @@ commit: fmt
 	node ./scripts/commit.js
 
 dev: lint
-	node ./scripts/constants.js
-	npm run dev
+	node ./scripts/dev.js
 	node ./dist/main.js
 
 fmt:
