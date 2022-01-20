@@ -26,7 +26,7 @@ help:
 	node ./scripts/help.js
 
 lint:
-	npm run lint
+	node ./scripts/lint.js
 
 start:
 	@node ./dist/main.js

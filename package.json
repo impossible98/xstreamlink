@@ -31,7 +31,6 @@
         "url": "https://github.com/impossible98/xstreamlink.git"
     },
     "scripts": {
-        "dev": "tsc",
-        "lint": "eslint . --ext .ts"
+        "dev": "tsc"
     }
 }
