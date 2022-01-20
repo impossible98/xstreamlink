@@ -16,7 +16,7 @@ commit: fmt
 
 dev: lint
 	node ./scripts/dev.js
-	node ./dist/main.js
+	node ./dist/main.js version
 
 fmt:
 	node ./scripts/fmt.js

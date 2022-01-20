@@ -12,10 +12,6 @@ const rl = readline.createInterface({
 });
 
 class Tag {
-    constructor() {
-        this.type = ['feat', 'fix', 'docs', 'style', 'refactor', 'perf', 'test', 'build', 'ci', 'chore', 'revert'];
-    }
-
     question(query) {
         return new Promise(function(resolve) {
             return rl.question(query, function(answer) {
