@@ -28,7 +28,7 @@ class Commit {
         let answer4;
 
         for (; true;) {
-            answer = await this.question('Please input your commit type: ');
+            answer = await this.question(`Please input your commit type (${this.type}): `);
             if (this.type.indexOf(answer) !== -1) {
                 break;
             }
@@ -45,7 +45,9 @@ class Commit {
                 break;
             }
         }
+
         console.log(`${answer}${answer2}: ${answer3.trim()}`);
+
         answer4 = await this.question('Are you sure to git commit? (y/N) ');
 
         if (answer4.toLowerCase() === 'y') {

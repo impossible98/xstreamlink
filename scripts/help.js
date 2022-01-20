@@ -1,5 +1,5 @@
 class Help {
-    print() {
+    async print() {
         console.log('Usage: make [command]');
         console.log('');
         console.log('  build: build the application');

@@ -20,7 +20,7 @@ dev: lint
 	node ./dist/main.js
 
 fmt:
-	npm run fmt
+	node ./scripts/fmt.js
 
 help:
 	node ./scripts/help.js
