@@ -1,3 +1,4 @@
+import * as childProcess from 'child_process';
 import * as process from 'process';
 import * as readline from 'readline';
 
@@ -25,36 +26,28 @@ export async function main() {
 
         if (answer.startsWith('https://www.173.com/')) {
             const __173 = new api._173(answer);
+            const value = await __173.getStreamLink();
 
-            __173.getStreamLink().then(
-                function(value) {
-                    console.log(value);
-                },
-            );
+            console.log(value);
+            childProcess.execFile('mpv', [`${JSON.parse(value).source.origin}`]);
         } else if (answer.startsWith('https://www.2cq.com/')) {
             const _2cq = new api._2CQ(answer);
+            const value = await _2cq.getStreamLink();
 
-            _2cq.getStreamLink().then(
-                function(value) {
-                    console.log(value);
-                },
-            );
+            console.log(value);
+            childProcess.execFile('mpv', [`${JSON.parse(value).source.origin}`]);
         } else if (answer.startsWith('https://live.51lm.tv/room/')) {
             const _51lm = new api._51LM(answer);
+            const value = await _51lm.getStreamLink();
 
-            _51lm.getStreamLink().then(
-                function(value) {
-                    console.log(value);
-                },
-            );
+            console.log(value);
+            childProcess.execFile('mpv', [`${JSON.parse(value).source.origin}`]);
         } else if (answer.startsWith('https://cc.163.com/')) {
             const cc = new api.CC(answer);
+            const value = await cc.getStreamLink();
 
-            cc.getStreamLink().then(
-                function(value) {
-                    console.log(value);
-                },
-            );
+            console.log(value);
+            childProcess.execFile('mpv', [`${JSON.parse(value).source.origin}`]);
         } else {
             console.log('链接不合法');
         }

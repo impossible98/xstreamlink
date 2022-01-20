@@ -1,6 +1,6 @@
 {
   "name": "xstreamlink",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "bin": {
     "xstreamlink": "./dist/main.js"
   },

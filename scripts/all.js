@@ -1,13 +1,20 @@
-const { Constants } = require('./constants');
-
-const constants = new Constants();
+const fs = require('fs/promises');
 
 class All {
-    print() {
-        constants.getConstants().then(function(value) {
-            console.log('Building ' + value[0] + ' ' + value[2]);
-            console.log('Show help in `make help`');
-        });
+    async getConstants() {
+        const data = await fs.readFile('Makefile', 'UTF-8');
+        let appName = data.match(/APP_NAME := (.*)/)[1];
+        let binName = data.match(/BIN_NAME := (.*)/)[1];
+        let version = data.match(/APP_VERSION := (.*)/)[1];
+        let constants = [appName, binName, version];
+
+        return constants;
+    }
+
+    async print() {
+        const value = await this.getConstants();
+        console.log('Building ' + value[0] + ' ' + value[2]);
+        console.log('Show help in `make help`');
     }
 }
 
