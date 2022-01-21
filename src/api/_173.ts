@@ -1,10 +1,10 @@
 // Update: 2021-12-16
 // Example: https://www.173.com/8
 // All: https://www.173.com/room/category?categoryId=11
-import axios from 'axios';
-import * as childProcess from 'child_process';
 
-import { ConfigApp } from '../config/mod';
+import axios from 'axios';
+
+import { BaseAPI } from '../utils/api';
 
 type Streamlink = {
     state: number;
@@ -20,14 +20,9 @@ type Source = {
 
 let streamLink: Streamlink;
 
-const configApp = new ConfigApp();
-const config = configApp.getConfig();
-
-class _173 {
-    url: string;
-
+class _173 extends BaseAPI {
     constructor(url: string) {
-        this.url = url;
+        super(url);
     }
 
     private getRoomId() {
@@ -80,16 +75,7 @@ class _173 {
     }
 
     async print() {
-        let value = await this.getStreamLink();
-        console.log(JSON.stringify(value, null, 4));
-
-        if (value.state === 0) {
-            if (config.open) {
-                childProcess.execFile('mpv', [`${value.source?.origin}`]);
-            }
-        } else {
-            process.exit(0);
-        }
+        super.print();
     }
 }
 

@@ -3,6 +3,8 @@
 // All: https://cc.163.com/category/live/
 import axios from 'axios';
 
+import { BaseAPI } from '../utils/api';
+
 type Streamlink = {
     state: number;
     source?: Source;
@@ -17,11 +19,9 @@ type Source = {
 
 let streamLink: Streamlink;
 
-class CC {
-    url: string;
-
+class CC extends BaseAPI {
     constructor(url: string) {
-        this.url = url;
+        super(url);
     }
 
     getRoomId() {
@@ -54,14 +54,14 @@ class CC {
                     url: this.url,
                 };
 
-                return JSON.stringify(streamLink, null, 4);
+                return streamLink;
             } else {
                 streamLink = {
                     state: 1,
                     url: this.url,
                 };
 
-                return JSON.stringify(streamLink, null, 4);
+                return streamLink;
             }
         } else {
             streamLink = {
@@ -69,8 +69,12 @@ class CC {
                 url: this.url,
             };
 
-            return JSON.stringify(streamLink, null, 4);
+            return streamLink;
         }
+    }
+
+    async print() {
+        super.print();
     }
 }
 

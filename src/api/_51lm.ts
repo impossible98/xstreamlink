@@ -1,6 +1,8 @@
 // Update: 2021-12-17
 // Example: https://live.51lm.tv/room/26051
 // All: https://live.51lm.tv/programs/Hot
+import { BaseAPI } from '../utils/api';
+
 type Streamlink = {
     state: number;
     source?: Source;
@@ -15,11 +17,9 @@ type Source = {
 
 let streamLink: Streamlink;
 
-class _51LM {
-    url: string;
-
+class _51LM extends BaseAPI {
     constructor(url: string) {
-        this.url = url;
+        super(url);
     }
 
     getRoomId() {
@@ -35,7 +35,11 @@ class _51LM {
             url: this.url,
         };
 
-        return JSON.stringify(streamLink, null, 4);
+        return streamLink;
+    }
+
+    async print() {
+        super.print();
     }
 }
 

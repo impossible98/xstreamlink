@@ -28,13 +28,22 @@ class Constants {
 
         await fs.writeFile(
             this.namePath,
-            `export const appName = '${constants[0]}';
-export const binName = '${constants[1]}';
+            `const appName = '${constants[0]}';
+const binName = '${constants[1]}';
+
+export {
+    appName,
+    binName,
+}
 `,
         );
         await fs.writeFile(
             this.versionPath,
-            `export const version = '${constants[2]}';
+            `const version = '${constants[2]}';
+
+export {
+    version
+}
 `,
         );
     }

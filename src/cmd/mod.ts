@@ -1,4 +1,3 @@
-import * as childProcess from 'child_process';
 import * as process from 'process';
 import * as readline from 'readline';
 
@@ -6,7 +5,7 @@ import { api } from '../lib';
 import { help } from './help';
 import { version } from './version';
 
-import { ConfigApp, defaultConfigToml } from '../config/mod';
+import { AppConfig, defaultConfigToml } from '../config/mod';
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -21,7 +20,7 @@ function question(query: string): Promise<string> {
     });
 }
 
-const configApp = new ConfigApp();
+const configApp = new AppConfig();
 
 export async function main() {
     if (!configApp.exitsConfig()) {
@@ -38,22 +37,16 @@ export async function main() {
             __173.print();
         } else if (answer.startsWith('https://www.2cq.com/')) {
             const _2cq = new api._2CQ(answer);
-            const value = await _2cq.getStreamLink();
 
-            console.log(value);
-            childProcess.execFile('mpv', [`${JSON.parse(value).source.origin}`]);
+            _2cq.print();
         } else if (answer.startsWith('https://live.51lm.tv/room/')) {
             const _51lm = new api._51LM(answer);
-            const value = await _51lm.getStreamLink();
 
-            console.log(value);
-            childProcess.execFile('mpv', [`${JSON.parse(value).source.origin}`]);
+            _51lm.print();
         } else if (answer.startsWith('https://cc.163.com/')) {
             const cc = new api.CC(answer);
-            const value = await cc.getStreamLink();
 
-            console.log(value);
-            childProcess.execFile('mpv', [`${JSON.parse(value).source.origin}`]);
+            cc.print();
         } else {
             console.log('链接不合法');
         }

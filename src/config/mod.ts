@@ -1,4 +1,3 @@
-import { defaultConfig } from './default';
-import { ConfigApp, defaultConfigToml } from './init';
+import { AppConfig, defaultConfigToml } from './init';
 
-export { ConfigApp, defaultConfig, defaultConfigToml };
+export { AppConfig, defaultConfigToml };

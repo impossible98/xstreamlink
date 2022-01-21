@@ -1,7 +1,9 @@
 // Update: 2021-12-15
-// Example: https://www.2cq.com/932285
+// Example: https://www.2cq.com/933860
 // All: https://www.2cq.com/
 import axios from 'axios';
+
+import { BaseAPI } from '../utils/api';
 
 type Streamlink = {
     state: number;
@@ -17,11 +19,9 @@ type Source = {
 
 let streamLink: Streamlink;
 
-class _2CQ {
-    url: string;
-
+class _2CQ extends BaseAPI {
     constructor(url: string) {
-        this.url = url;
+        super(url);
     }
 
     getRoomId() {
@@ -52,14 +52,14 @@ class _2CQ {
                     url: this.url,
                 };
 
-                return JSON.stringify(streamLink, null, 4);
+                return streamLink;
             } else {
                 streamLink = {
                     state: 1,
                     url: this.url,
                 };
 
-                return JSON.stringify(streamLink, null, 4);
+                return streamLink;
             }
         } else {
             streamLink = {
@@ -67,8 +67,12 @@ class _2CQ {
                 url: this.url,
             };
 
-            return JSON.stringify(streamLink, null, 4);
+            return streamLink;
         }
+    }
+
+    async print() {
+        super.print();
     }
 }
 

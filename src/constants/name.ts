@@ -1,2 +1,4 @@
-export const appName = 'xStreamLink';
-export const binName = 'xstreamlink';
+const appName = 'xStreamLink';
+const binName = 'xstreamlink';
+
+export { appName, binName };

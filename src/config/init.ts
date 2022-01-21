@@ -1,31 +1,29 @@
 import fs from 'fs';
-import os from 'os';
-import path from 'path';
 
 import TOML from '@iarna/toml';
 
-import { BinName } from '../constants/mod';
-import { defaultConfig } from './default';
+import { Config, ConfigPath } from '../constants/mod';
 
-let defaultConfigToml = TOML.stringify(defaultConfig);
+let defaultConfigToml = TOML.stringify(Config);
 
-class ConfigApp {
-    configPath: string;
+type ConfigToml = {
+    open?: boolean;
+    player?: string;
+};
 
-    constructor() {
-        this.configPath = path.join(os.homedir(), '.config', BinName, 'config.toml');
-    }
-
+class AppConfig {
     exitsConfig() {
-        return fs.existsSync(this.configPath);
+        return fs.existsSync(ConfigPath);
     }
 
     getConfig() {
-        return TOML.parse(fs.readFileSync(this.configPath, 'utf8'));
+        let config: ConfigToml = TOML.parse(fs.readFileSync(ConfigPath, 'utf8'));
+
+        return config;
     }
 
     writeConfig(config: string) {
-        fs.writeFileSync(this.configPath, config);
+        fs.writeFileSync(ConfigPath, config);
     }
 }
-export { ConfigApp, defaultConfigToml };
+export { AppConfig, defaultConfigToml };
