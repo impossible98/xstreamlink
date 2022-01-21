@@ -15,7 +15,7 @@ type Source = {
 
 let streamLink: Streamlink;
 
-export class _51LM {
+class _51LM {
     url: string;
 
     constructor(url: string) {
@@ -38,3 +38,5 @@ export class _51LM {
         return JSON.stringify(streamLink, null, 4);
     }
 }
+
+export { _51LM };

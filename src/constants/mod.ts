@@ -1,6 +1,5 @@
+import { config } from './config';
 import { appName, binName } from './name';
 import { version } from './version';
 
-export const AppName = appName;
-export const BinName = binName;
-export const Version = version;
+export { appName as AppName, binName as BinName, config as Config, version as Version };

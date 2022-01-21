@@ -17,7 +17,7 @@ type Source = {
 
 let streamLink: Streamlink;
 
-export class CC {
+class CC {
     url: string;
 
     constructor(url: string) {
@@ -73,3 +73,5 @@ export class CC {
         }
     }
 }
+
+export { CC };

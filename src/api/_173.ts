@@ -2,6 +2,9 @@
 // Example: https://www.173.com/8
 // All: https://www.173.com/room/category?categoryId=11
 import axios from 'axios';
+import * as childProcess from 'child_process';
+
+import { ConfigApp } from '../config/mod';
 
 type Streamlink = {
     state: number;
@@ -17,18 +20,21 @@ type Source = {
 
 let streamLink: Streamlink;
 
-export class _173 {
+const configApp = new ConfigApp();
+const config = configApp.getConfig();
+
+class _173 {
     url: string;
 
     constructor(url: string) {
         this.url = url;
     }
 
-    getRoomId() {
+    private getRoomId() {
         return this.url.split('/')[3];
     }
 
-    async getResponse() {
+    private async getResponse() {
         const response = await axios.get(`https://www.173.com/room/getVieoUrl`, {
             params: {
                 roomId: this.getRoomId(),
@@ -54,14 +60,14 @@ export class _173 {
                     url: this.url,
                 };
 
-                return JSON.stringify(streamLink, null, 4);
+                return streamLink;
             } else {
                 streamLink = {
                     state: 1,
                     url: this.url,
                 };
 
-                return JSON.stringify(streamLink, null, 4);
+                return streamLink;
             }
         } else {
             streamLink = {
@@ -69,7 +75,22 @@ export class _173 {
                 url: this.url,
             };
 
-            return JSON.stringify(streamLink, null, 4);
+            return streamLink;
+        }
+    }
+
+    async print() {
+        let value = await this.getStreamLink();
+        console.log(JSON.stringify(value, null, 4));
+
+        if (value.state === 0) {
+            if (config.open) {
+                childProcess.execFile('mpv', [`${value.source?.origin}`]);
+            }
+        } else {
+            process.exit(0);
         }
     }
 }
+
+export { _173 };

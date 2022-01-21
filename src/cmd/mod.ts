@@ -6,6 +6,8 @@ import { api } from '../lib';
 import { help } from './help';
 import { version } from './version';
 
+import { ConfigApp, defaultConfigToml } from '../config/mod';
+
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
@@ -19,17 +21,21 @@ function question(query: string): Promise<string> {
     });
 }
 
+const configApp = new ConfigApp();
+
 export async function main() {
+    if (!configApp.exitsConfig()) {
+        configApp.writeConfig(defaultConfigToml);
+    }
+
     if (process.argv.length === 2) {
         let answer = await question('请输入直播间链接: ');
         answer = answer.trim();
 
         if (answer.startsWith('https://www.173.com/')) {
             const __173 = new api._173(answer);
-            const value = await __173.getStreamLink();
 
-            console.log(value);
-            childProcess.execFile('mpv', [`${JSON.parse(value).source.origin}`]);
+            __173.print();
         } else if (answer.startsWith('https://www.2cq.com/')) {
             const _2cq = new api._2CQ(answer);
             const value = await _2cq.getStreamLink();
