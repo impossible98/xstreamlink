@@ -26,7 +26,9 @@ class All {
 
     async print() {
         const value = await this.getConstants();
-        console.log(`Building ${Color.green(value[0])} ${Color.yellow(value[1])}`);
+        const [appName, version] = value
+
+        console.log(`Building ${Color.green(appName)} ${Color.yellow(version)}`);
         console.log(`Show help in \`${Color.red('make help')}\``);
     }
 }

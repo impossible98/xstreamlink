@@ -36,6 +36,10 @@ export async function main() {
         const cc = new api.CC(answer);
 
         cc.print();
+    } else if (answer.startsWith('https://www.huya.com/')) {
+        const huya = new api.Huya(answer);
+
+        huya.print();
     } else {
         console.log('链接不合法');
     }

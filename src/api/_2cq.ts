@@ -10,7 +10,7 @@ type Streamlink = {
     source?: Source;
     streamer?: string;
     title?: string;
-    url?: string;
+    url: string;
 };
 
 type Source = {

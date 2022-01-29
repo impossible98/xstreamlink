@@ -74,13 +74,14 @@ var All = (function () {
     };
     All.prototype.print = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var value;
+            var value, appName, version;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4, this.getConstants()];
                     case 1:
                         value = _a.sent();
-                        console.log("Building ".concat(Color.green(value[0]), " ").concat(Color.yellow(value[1])));
+                        appName = value[0], version = value[1];
+                        console.log("Building ".concat(Color.green(appName), " ").concat(Color.yellow(version)));
                         console.log("Show help in `".concat(Color.red('make help'), "`"));
                         return [2];
                 }

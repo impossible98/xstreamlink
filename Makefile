@@ -1,5 +1,5 @@
 APP_NAME := xStreamLink
-APP_VERSION := 0.5.0
+APP_VERSION := 0.6.0
 BIN_NAME := xstreamlink
 
 SHELL := /bin/bash
@@ -8,10 +8,9 @@ all:
 	@node ./scripts/all.js
 
 build:
-	node ./scripts/constants.js
 	node ./scripts/build.js
 
-commit: fmt
+commit: fmt build
 	node ./scripts/commit.js
 
 dev: lint

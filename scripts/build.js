@@ -41,6 +41,68 @@ var os = require("os");
 var path = require("path");
 var util = require("util");
 var execFile = util.promisify(require('child_process').execFile);
+var Color = (function () {
+    function Color() {
+    }
+    Color.green = function (word) {
+        return "\u001B[32m".concat(word, "\u001B[0m");
+    };
+    Color.red = function (word) {
+        return "\u001B[31m".concat(word, "\u001B[0m");
+    };
+    Color.yellow = function (word) {
+        return "\u001B[33m".concat(word, "\u001B[0m");
+    };
+    return Color;
+}());
+var Constants = (function () {
+    function Constants() {
+        this.versionPath = path.join(__dirname, '..', 'src', 'constants', 'version.ts');
+    }
+    Constants.prototype.getConstants = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var makefileData, appName, version, constants;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4, fs.readFile('Makefile', 'utf-8')];
+                    case 1:
+                        makefileData = _a.sent();
+                        appName = makefileData.match(/APP_NAME := (.*)/)[1];
+                        version = makefileData.match(/APP_VERSION := (.*)/)[1];
+                        constants = [appName, version];
+                        return [2, constants];
+                }
+            });
+        });
+    };
+    Constants.prototype.write = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var value, pkgData, pkg, appName, version;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4, this.getConstants()];
+                    case 1:
+                        value = _a.sent();
+                        return [4, fs.readFile('package.json', 'utf8')];
+                    case 2:
+                        pkgData = _a.sent();
+                        pkg = JSON.parse(pkgData);
+                        appName = value[0], version = value[1];
+                        pkg.version = version;
+                        console.log("Building ".concat(Color.green(appName), " ").concat(Color.yellow(version)));
+                        return [4, fs.writeFile('package.json', JSON.stringify(pkg, null, 4) + "\n")];
+                    case 3:
+                        _a.sent();
+                        return [4, fs.writeFile(this.versionPath, "const version = '".concat(version, "';\n\nexport {\n    version\n}\n"))];
+                    case 4:
+                        _a.sent();
+                        return [2];
+                }
+            });
+        });
+    };
+    return Constants;
+}());
 var Build = (function () {
     function Build() {
     }
@@ -98,7 +160,9 @@ var Build = (function () {
     return Build;
 }());
 function main() {
+    var constants = new Constants();
     var fmt = new Build();
+    constants.write();
     fmt.exec();
 }
 main();

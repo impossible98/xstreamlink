@@ -5,6 +5,56 @@ import * as util from 'util';
 
 const execFile = util.promisify(require('child_process').execFile);
 
+class Color {
+    static green(word:string) {
+        return `\x1B[32m${word}\x1B[0m`;
+    }
+    static red(word:string) {
+        return `\x1B[31m${word}\x1B[0m`;
+    }
+
+    static yellow(word:string) {
+        return `\x1B[33m${word}\x1B[0m`;
+    }
+}
+
+class Constants {
+    versionPath: string;
+
+    constructor() {
+        this.versionPath = path.join(__dirname, '..', 'src', 'constants', 'version.ts');
+    }
+
+    async getConstants() {
+        const makefileData = await fs.readFile('Makefile', 'utf-8');
+        let appName = makefileData.match(/APP_NAME := (.*)/)[1];
+        let version = makefileData.match(/APP_VERSION := (.*)/)[1];
+        let constants = [appName, version];
+
+        return constants;
+    }
+
+    async write() {
+        const value = await this.getConstants();
+        const pkgData = await fs.readFile('package.json', 'utf8');
+        const pkg = JSON.parse(pkgData);
+        const [appName, version] = value
+        pkg.version = version;
+
+        console.log(`Building ${Color.green(appName)} ${Color.yellow(version)}`);
+        await fs.writeFile('package.json', JSON.stringify(pkg, null, 4) + "\n");
+        await fs.writeFile(
+            this.versionPath,
+            `const version = '${version}';
+
+export {
+    version
+}
+`,
+        );
+    }
+}
+
 class Build {
     async exec() {
         const command = 'ncc';
@@ -37,8 +87,10 @@ class Build {
 }
 
 function main() {
+    const constants = new Constants();
     const fmt = new Build();
     // exec command
+    constants.write();
     fmt.exec();
 }
 

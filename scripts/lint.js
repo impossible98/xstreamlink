@@ -45,24 +45,39 @@ var Lint = (function () {
     }
     Lint.prototype.exec = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var command, commandPath, commandPath;
+            var command, commandPath, error_1, commandPath, error_2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         command = 'eslint';
-                        if (!(os.platform() === 'win32')) return [3, 2];
+                        if (!(os.platform() === 'win32')) return [3, 5];
                         commandPath = path.join(__dirname, '..', 'node_modules', '.bin', "".concat(command, ".cmd"));
-                        return [4, execFile(commandPath, ['.', '--ext', '.ts'])];
+                        _a.label = 1;
                     case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4, execFile(commandPath, ['.', '--ext', '.ts'])];
+                    case 2:
                         _a.sent();
                         return [3, 4];
-                    case 2:
-                        commandPath = path.join(__dirname, '..', 'node_modules', '.bin', "".concat(command));
-                        return [4, execFile(commandPath, ['.', '--ext', '.ts'])];
                     case 3:
+                        error_1 = _a.sent();
+                        console.log(error_1.stdout);
+                        return [3, 4];
+                    case 4: return [3, 9];
+                    case 5:
+                        commandPath = path.join(__dirname, '..', 'node_modules', '.bin', "".concat(command));
+                        _a.label = 6;
+                    case 6:
+                        _a.trys.push([6, 8, , 9]);
+                        return [4, execFile(commandPath, ['.', '--ext', '.ts'])];
+                    case 7:
                         _a.sent();
-                        _a.label = 4;
-                    case 4: return [2];
+                        return [3, 9];
+                    case 8:
+                        error_2 = _a.sent();
+                        console.log(error_2.stdout);
+                        return [3, 9];
+                    case 9: return [2];
                 }
             });
         });
