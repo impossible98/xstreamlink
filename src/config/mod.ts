@@ -1,3 +1,3 @@
-import { AppConfig, defaultConfigToml } from './init';
+import { AppConfig, defaultConfigToml, historyPath } from './init';
 
-export { AppConfig, defaultConfigToml };
+export { AppConfig, defaultConfigToml, historyPath };

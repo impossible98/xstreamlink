@@ -2,7 +2,7 @@ import * as process from 'process';
 
 import * as constants from '../constants/mod';
 
-export async function help() {
+function help() {
     console.log(`Usage: ${constants.BinName} [command]`);
     console.log('');
     console.log('  help: show this help');
@@ -11,3 +11,5 @@ export async function help() {
     console.log('');
     process.exit(0);
 }
+
+export { help };

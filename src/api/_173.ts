@@ -74,8 +74,8 @@ class _173 extends BaseAPI {
         }
     }
 
-    async print() {
-        super.print();
+    async exec() {
+        super.exec();
     }
 }
 

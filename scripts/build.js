@@ -108,51 +108,81 @@ var Build = (function () {
     }
     Build.prototype.exec = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var command, command2, commandPath, command2Path, commandPath, command2Path;
+            var command, command2, commandPath, command2Path, error_1, error_2, commandPath, command2Path, error_3, error_4;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         command = 'ncc';
                         command2 = 'tsc';
-                        if (!(os.platform() === 'win32')) return [3, 6];
+                        if (!(os.platform() === 'win32')) return [3, 11];
                         commandPath = path.join(__dirname, '..', 'node_modules', '.bin', "".concat(command, ".cmd"));
                         command2Path = path.join(__dirname, '..', 'node_modules', '.bin', "".concat(command2, ".cmd"));
-                        return [4, execFile(commandPath, ['build', 'src/main.ts'])];
+                        _a.label = 1;
                     case 1:
-                        _a.sent();
-                        return [4, fs.rename(path.join(__dirname, '..', 'dist', 'index.js'), path.join(__dirname, '..', 'dist', 'main.js'))];
+                        _a.trys.push([1, 4, , 5]);
+                        return [4, execFile(commandPath, ['build', 'src/main.ts'])];
                     case 2:
                         _a.sent();
-                        return [4, execFile(commandPath, ['build', 'src/lib.ts'])];
+                        return [4, fs.rename(path.join(__dirname, '..', 'dist', 'index.js'), path.join(__dirname, '..', 'dist', 'main.js'))];
                     case 3:
                         _a.sent();
-                        return [4, fs.rename(path.join(__dirname, '..', 'dist', 'index.js'), path.join(__dirname, '..', 'dist', 'lib.js'))];
+                        return [3, 5];
                     case 4:
-                        _a.sent();
-                        return [4, execFile(command2Path, ['--project', 'tsconfig.scripts.json'])];
+                        error_1 = _a.sent();
+                        console.log(error_1.stderr);
+                        return [3, 5];
                     case 5:
-                        _a.sent();
-                        return [3, 12];
+                        _a.trys.push([5, 8, , 9]);
+                        return [4, execFile(commandPath, ['build', 'src/lib.ts'])];
                     case 6:
-                        commandPath = path.join(__dirname, '..', 'node_modules', '.bin', "".concat(command));
-                        command2Path = path.join(__dirname, '..', 'node_modules', '.bin', "".concat(command2));
-                        return [4, execFile(commandPath, ['build', 'src/main.ts'])];
+                        _a.sent();
+                        return [4, fs.rename(path.join(__dirname, '..', 'dist', 'index.js'), path.join(__dirname, '..', 'dist', 'lib.js'))];
                     case 7:
                         _a.sent();
-                        return [4, fs.rename(path.join(__dirname, '..', 'dist', 'index.js'), path.join(__dirname, '..', 'dist', 'main.js'))];
+                        return [3, 9];
                     case 8:
-                        _a.sent();
-                        return [4, execFile(commandPath, ['build', 'src/lib.ts'])];
-                    case 9:
-                        _a.sent();
-                        return [4, fs.rename(path.join(__dirname, '..', 'dist', 'index.js'), path.join(__dirname, '..', 'dist', 'lib.js'))];
+                        error_2 = _a.sent();
+                        console.log(error_2.stderr);
+                        return [3, 9];
+                    case 9: return [4, execFile(command2Path, ['--project', 'tsconfig.scripts.json'])];
                     case 10:
                         _a.sent();
-                        return [4, execFile(command2Path, ['--project', 'tsconfig.scripts.json'])];
+                        return [3, 22];
                     case 11:
-                        _a.sent();
+                        commandPath = path.join(__dirname, '..', 'node_modules', '.bin', "".concat(command));
+                        command2Path = path.join(__dirname, '..', 'node_modules', '.bin', "".concat(command2));
                         _a.label = 12;
-                    case 12: return [2];
+                    case 12:
+                        _a.trys.push([12, 15, , 16]);
+                        return [4, execFile(commandPath, ['build', 'src/main.ts'])];
+                    case 13:
+                        _a.sent();
+                        return [4, fs.rename(path.join(__dirname, '..', 'dist', 'index.js'), path.join(__dirname, '..', 'dist', 'main.js'))];
+                    case 14:
+                        _a.sent();
+                        return [3, 16];
+                    case 15:
+                        error_3 = _a.sent();
+                        console.log(error_3.stderr);
+                        return [3, 16];
+                    case 16:
+                        _a.trys.push([16, 19, , 20]);
+                        return [4, execFile(commandPath, ['build', 'src/lib.ts'])];
+                    case 17:
+                        _a.sent();
+                        return [4, fs.rename(path.join(__dirname, '..', 'dist', 'index.js'), path.join(__dirname, '..', 'dist', 'lib.js'))];
+                    case 18:
+                        _a.sent();
+                        return [3, 20];
+                    case 19:
+                        error_4 = _a.sent();
+                        console.log(error_4.stderr);
+                        return [3, 20];
+                    case 20: return [4, execFile(command2Path, ['--project', 'tsconfig.scripts.json'])];
+                    case 21:
+                        _a.sent();
+                        _a.label = 22;
+                    case 22: return [2];
                 }
             });
         });

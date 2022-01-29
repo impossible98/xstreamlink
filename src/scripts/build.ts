@@ -6,14 +6,14 @@ import * as util from 'util';
 const execFile = util.promisify(require('child_process').execFile);
 
 class Color {
-    static green(word:string) {
+    static green(word: string) {
         return `\x1B[32m${word}\x1B[0m`;
     }
-    static red(word:string) {
+    static red(word: string) {
         return `\x1B[31m${word}\x1B[0m`;
     }
 
-    static yellow(word:string) {
+    static yellow(word: string) {
         return `\x1B[33m${word}\x1B[0m`;
     }
 }
@@ -64,22 +64,38 @@ class Build {
             const commandPath = path.join(__dirname, '..', 'node_modules', '.bin', `${command}.cmd`);
             const command2Path = path.join(__dirname, '..', 'node_modules', '.bin', `${command2}.cmd`);
             // ncc build src/main.ts and rename index.js to main.js
-            await execFile(commandPath, ['build', 'src/main.ts']);
-            await fs.rename(path.join(__dirname, '..', 'dist', 'index.js'), path.join(__dirname, '..', 'dist', 'main.js'));
+            try {
+                await execFile(commandPath, ['build', 'src/main.ts']);
+                await fs.rename(path.join(__dirname, '..', 'dist', 'index.js'), path.join(__dirname, '..', 'dist', 'main.js'));
+            } catch (error) {
+                console.log(error.stderr);
+            }
             // ncc build src/lib.ts and rename index.js to lib.js
-            await execFile(commandPath, ['build', 'src/lib.ts']);
-            await fs.rename(path.join(__dirname, '..', 'dist', 'index.js'), path.join(__dirname, '..', 'dist', 'lib.js'));
+            try {
+                await execFile(commandPath, ['build', 'src/lib.ts']);
+                await fs.rename(path.join(__dirname, '..', 'dist', 'index.js'), path.join(__dirname, '..', 'dist', 'lib.js'));
+            } catch (error) {
+                console.log(error.stderr);
+            }
             // tsc --project tsconfig.scripts.json
             await execFile(command2Path, ['--project', 'tsconfig.scripts.json']);
         } else {
             const commandPath = path.join(__dirname, '..', 'node_modules', '.bin', `${command}`);
             const command2Path = path.join(__dirname, '..', 'node_modules', '.bin', `${command2}`);
             // ncc build src/main.ts and rename index.js to main.js
-            await execFile(commandPath, ['build', 'src/main.ts']);
-            await fs.rename(path.join(__dirname, '..', 'dist', 'index.js'), path.join(__dirname, '..', 'dist', 'main.js'));
+            try {
+                await execFile(commandPath, ['build', 'src/main.ts']);
+                await fs.rename(path.join(__dirname, '..', 'dist', 'index.js'), path.join(__dirname, '..', 'dist', 'main.js'));
+            } catch (error) {
+                console.log(error.stderr);
+            }
             // ncc build src/lib.ts and rename index.js to lib.js
-            await execFile(commandPath, ['build', 'src/lib.ts']);
-            await fs.rename(path.join(__dirname, '..', 'dist', 'index.js'), path.join(__dirname, '..', 'dist', 'lib.js'));
+            try {
+                await execFile(commandPath, ['build', 'src/lib.ts']);
+                await fs.rename(path.join(__dirname, '..', 'dist', 'index.js'), path.join(__dirname, '..', 'dist', 'lib.js'));
+            } catch (error) {
+                console.log(error.stderr);
+            }
             // tsc --project tsconfig.scripts.json
             await execFile(command2Path, ['--project', 'tsconfig.scripts.json']);
         }

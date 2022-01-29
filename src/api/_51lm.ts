@@ -38,8 +38,8 @@ class _51LM extends BaseAPI {
         return streamLink;
     }
 
-    async print() {
-        super.print();
+    async exec() {
+        super.exec();
     }
 }
 

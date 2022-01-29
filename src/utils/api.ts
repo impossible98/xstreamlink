@@ -1,11 +1,14 @@
 import * as childProcess from 'child_process';
 
 import { AppConfig } from '../config/mod';
-
+import { History, HistoryArray } from '../history/mod';
+import { datetime } from '../utils/datetime';
 const appConfig = new AppConfig();
 const config = appConfig.getConfig();
+const history = new History();
 
 type Streamlink = {
+    datetime?: string;
     state: number;
     source?: Source;
     streamer?: string;
@@ -35,12 +38,20 @@ class BaseAPI {
         return streamLink;
     }
 
-    async print() {
+    async exec() {
         const value = await this.getStreamLink();
         console.log(JSON.stringify(value, null, 4));
 
         if (value.state === 0) {
             if (config.open && config.player) {
+                const historyData: HistoryArray = {
+                    history: [{
+                        datetime: datetime,
+                        url: value.url,
+                    }],
+                };
+
+                history.write(historyData, value.url);
                 childProcess.execFile(config.player, [`${value.source?.origin}`]);
             }
         } else {
