@@ -4,7 +4,7 @@ import TOML from '@iarna/toml';
 
 import { Config, ConfigPath } from '../constants/mod';
 
-let defaultConfigToml = TOML.stringify(Config);
+const defaultConfigToml = TOML.stringify(Config);
 
 type ConfigToml = {
     open?: boolean;
@@ -17,7 +17,7 @@ class AppConfig {
     }
 
     getConfig() {
-        let config: ConfigToml = TOML.parse(fs.readFileSync(ConfigPath, 'utf8'));
+        const config: ConfigToml = TOML.parse(fs.readFileSync(ConfigPath, 'utf8'));
 
         return config;
     }

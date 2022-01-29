@@ -36,41 +36,69 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
+var fs = require("fs/promises");
 var os = require("os");
 var path = require("path");
 var util = require("util");
 var execFile = util.promisify(require('child_process').execFile);
-var Fmt = (function () {
-    function Fmt() {
+var Build = (function () {
+    function Build() {
     }
-    Fmt.prototype.exec = function () {
+    Build.prototype.exec = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var command, commandPath, commandPath;
+            var command, command2, commandPath, command2Path, commandPath, command2Path;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        command = 'dprint';
-                        if (!(os.platform() === 'win32')) return [3, 2];
+                        command = 'ncc';
+                        command2 = 'tsc';
+                        if (!(os.platform() === 'win32')) return [3, 6];
                         commandPath = path.join(__dirname, '..', 'node_modules', '.bin', "".concat(command, ".cmd"));
-                        return [4, execFile(commandPath, ['fmt'])];
+                        command2Path = path.join(__dirname, '..', 'node_modules', '.bin', "".concat(command2, ".cmd"));
+                        return [4, execFile(commandPath, ['build', 'src/main.ts'])];
                     case 1:
                         _a.sent();
-                        return [3, 4];
+                        return [4, fs.rename(path.join(__dirname, '..', 'dist', 'index.js'), path.join(__dirname, '..', 'dist', 'main.js'))];
                     case 2:
-                        commandPath = path.join(__dirname, '..', 'node_modules', '.bin', "".concat(command));
-                        return [4, execFile(commandPath, ['fmt'])];
+                        _a.sent();
+                        return [4, execFile(commandPath, ['build', 'src/lib.ts'])];
                     case 3:
                         _a.sent();
-                        _a.label = 4;
-                    case 4: return [2];
+                        return [4, fs.rename(path.join(__dirname, '..', 'dist', 'index.js'), path.join(__dirname, '..', 'dist', 'lib.js'))];
+                    case 4:
+                        _a.sent();
+                        return [4, execFile(command2Path, ['--project', 'tsconfig.scripts.json'])];
+                    case 5:
+                        _a.sent();
+                        return [3, 12];
+                    case 6:
+                        commandPath = path.join(__dirname, '..', 'node_modules', '.bin', "".concat(command));
+                        command2Path = path.join(__dirname, '..', 'node_modules', '.bin', "".concat(command2));
+                        return [4, execFile(commandPath, ['build', 'src/main.ts'])];
+                    case 7:
+                        _a.sent();
+                        return [4, fs.rename(path.join(__dirname, '..', 'dist', 'index.js'), path.join(__dirname, '..', 'dist', 'main.js'))];
+                    case 8:
+                        _a.sent();
+                        return [4, execFile(commandPath, ['build', 'src/lib.ts'])];
+                    case 9:
+                        _a.sent();
+                        return [4, fs.rename(path.join(__dirname, '..', 'dist', 'index.js'), path.join(__dirname, '..', 'dist', 'lib.js'))];
+                    case 10:
+                        _a.sent();
+                        return [4, execFile(command2Path, ['--project', 'tsconfig.scripts.json'])];
+                    case 11:
+                        _a.sent();
+                        _a.label = 12;
+                    case 12: return [2];
                 }
             });
         });
     };
-    return Fmt;
+    return Build;
 }());
 function main() {
-    var fmt = new Fmt();
+    var fmt = new Build();
     fmt.exec();
 }
 main();

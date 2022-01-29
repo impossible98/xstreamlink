@@ -15,7 +15,7 @@ type Streamlink = {
 };
 
 type Source = {
-    origin?: string;
+    origin: string;
 };
 
 let streamLink: Streamlink;

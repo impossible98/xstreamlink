@@ -14,7 +14,7 @@ type Streamlink = {
 };
 
 type Source = {
-    origin?: string;
+    origin: string;
 };
 
 let streamLink: Streamlink;
@@ -36,7 +36,7 @@ class BaseAPI {
     }
 
     async print() {
-        let value = await this.getStreamLink();
+        const value = await this.getStreamLink();
         console.log(JSON.stringify(value, null, 4));
 
         if (value.state === 0) {

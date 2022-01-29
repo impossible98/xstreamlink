@@ -3,7 +3,7 @@ type Config = {
     player: string;
 };
 
-let config: Config = {
+const config: Config = {
     open: false,
     player: '',
 };

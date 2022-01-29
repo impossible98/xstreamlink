@@ -24,7 +24,7 @@ class Constants {
 
         pkg.version = constants[2];
 
-        await fs.writeFile('package.json', JSON.stringify(pkg, null, 2));
+        await fs.writeFile('package.json', JSON.stringify(pkg, null, 4));
 
         await fs.writeFile(
             this.namePath,

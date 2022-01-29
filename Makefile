@@ -9,7 +9,7 @@ all:
 
 build:
 	node ./scripts/constants.js
-	npm run dev
+	node ./scripts/build.js
 
 commit: fmt
 	node ./scripts/commit.js
