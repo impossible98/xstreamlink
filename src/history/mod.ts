@@ -31,19 +31,12 @@ class History {
         return data;
     }
 
-    async write(value: HistoryArray, url: string) {
+    async write(value: HistoryArray) {
         if (!this.exsit()) {
             await fs.mkdir(historyPath, {
                 recursive: true,
             });
         }
-
-        value.history = [
-            {
-                datetime: datetime,
-                url: url,
-            },
-        ];
         if (await this.read() === '') {
             await fs.writeFile(historyPath, JSON.stringify(value, null, 4) + '\n');
         } else {

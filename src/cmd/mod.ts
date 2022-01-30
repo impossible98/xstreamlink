@@ -4,6 +4,7 @@ import { config } from './config';
 import { help } from './help';
 import { history } from './history';
 import { main } from './main';
+import { set } from './set';
 import { version } from './version';
 
 // import { Config } from '../constants/mod';
@@ -24,11 +25,17 @@ export async function mod() {
         await main();
     } else if (process.argv.length === 3) {
         if (process.argv[2] == 'config') {
-            await config();
+            config();
         } else if (process.argv[2] == 'history') {
             await history();
         } else if (process.argv[2] == 'version') {
             version();
+        } else {
+            help();
+        }
+    } else if (process.argv.length === 5) {
+        if (process.argv[2] == 'set') {
+            set();
         } else {
             help();
         }

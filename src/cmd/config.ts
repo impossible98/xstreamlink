@@ -4,7 +4,7 @@ import { AppConfig } from '../config/mod';
 
 const _config = new AppConfig();
 
-async function config() {
+function config() {
     const configData = _config.read();
 
     console.log(configData);

@@ -40,7 +40,6 @@ class BaseAPI {
 
     async exec() {
         const value = await this.getStreamLink();
-        console.log(JSON.stringify(value, null, 4));
 
         if (value.state === 0) {
             if (config.open && config.player) {
@@ -51,10 +50,11 @@ class BaseAPI {
                     }],
                 };
 
-                history.write(historyData, value.url);
+                history.write(historyData);
                 childProcess.execFile(config.player, [`${value.source?.origin}`]);
             }
         } else {
+            console.log('未开播');
             process.exit(0);
         }
     }

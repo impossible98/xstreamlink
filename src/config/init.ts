@@ -10,6 +10,7 @@ const defaultConfigToml = TOML.stringify(Config);
 const historyPath = path.join(os.homedir(), '.config', BinName, 'history.json');
 
 type ConfigToml = {
+    history?: boolean;
     open?: boolean;
     player?: string;
 };
