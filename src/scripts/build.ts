@@ -47,9 +47,7 @@ class Constants {
             this.versionPath,
             `const version = '${version}';
 
-export {
-    version
-}
+export { version };
 `,
         );
     }

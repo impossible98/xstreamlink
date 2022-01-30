@@ -1,5 +1,5 @@
 APP_NAME := xStreamLink
-APP_VERSION := 0.7.0
+APP_VERSION := 0.7.1
 BIN_NAME := xstreamlink
 
 SHELL := /bin/bash

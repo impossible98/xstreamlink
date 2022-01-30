@@ -4,7 +4,7 @@ import { AppConfig } from '../config/mod';
 import { History, HistoryArray } from '../history/mod';
 import { datetime } from '../utils/datetime';
 const appConfig = new AppConfig();
-const config = appConfig.getConfig();
+const config = appConfig.get();
 const history = new History();
 
 type Streamlink = {

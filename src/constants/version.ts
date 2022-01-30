@@ -1,5 +1,3 @@
-const version = '0.7.0';
+const version = '0.7.1';
 
-export {
-    version
-}
+export { version };

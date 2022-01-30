@@ -93,7 +93,7 @@ var Constants = (function () {
                         return [4, fs.writeFile('package.json', JSON.stringify(pkg, null, 4) + "\n")];
                     case 3:
                         _a.sent();
-                        return [4, fs.writeFile(this.versionPath, "const version = '".concat(version, "';\n\nexport {\n    version\n}\n"))];
+                        return [4, fs.writeFile(this.versionPath, "const version = '".concat(version, "';\n\nexport { version };\n"))];
                     case 4:
                         _a.sent();
                         return [2];

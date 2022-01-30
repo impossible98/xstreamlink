@@ -15,17 +15,25 @@ type ConfigToml = {
 };
 
 class AppConfig {
-    exitsConfig() {
+    exits() {
         return fs.existsSync(ConfigPath);
     }
 
-    getConfig() {
-        const config: ConfigToml = TOML.parse(fs.readFileSync(ConfigPath, 'utf8'));
+    read() {
+        if (this.exits()) {
+            return fs.readFileSync(ConfigPath, 'utf-8');
+        } else {
+            return defaultConfigToml;
+        }
+    }
+
+    get() {
+        const config: ConfigToml = TOML.parse(fs.readFileSync(ConfigPath, 'utf-8'));
 
         return config;
     }
 
-    writeConfig(config: string) {
+    write(config: string) {
         fs.writeFileSync(ConfigPath, config);
     }
 }

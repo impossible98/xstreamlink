@@ -1,30 +1,38 @@
 import * as process from 'process';
 
+import { config } from './config';
 import { help } from './help';
 import { history } from './history';
 import { main } from './main';
 import { version } from './version';
 
-import { AppConfig, defaultConfigToml } from '../config/mod';
+// import { Config } from '../constants/mod';
+// import { AppConfig } from '../config/mod';
 
-const configApp = new AppConfig();
+// const configApp = new AppConfig();
 
 export async function mod() {
-    if (!configApp.exitsConfig()) {
-        configApp.writeConfig(defaultConfigToml);
-    }
+    // var _config
+
+    // if (configApp.exits()) {
+    //     _config = configApp.get();
+    // } else {
+    //     _config = Config;
+    // }
 
     if (process.argv.length === 2) {
         await main();
     } else if (process.argv.length === 3) {
-        if (process.argv[2] == 'history') {
+        if (process.argv[2] == 'config') {
+            await config();
+        } else if (process.argv[2] == 'history') {
             await history();
         } else if (process.argv[2] == 'version') {
-            await version();
+            version();
         } else {
-            await help();
+            help();
         }
     } else {
-        await help();
+        help();
     }
 }
