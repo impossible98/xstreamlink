@@ -18,6 +18,7 @@ function question(query: string): Promise<string> {
 
 async function main() {
     let answer = await question('请输入直播间链接: ');
+
     answer = answer.trim();
 
     if (answer.startsWith('https://www.173.com/')) {
@@ -36,6 +37,10 @@ async function main() {
         const cc = new api.CC(answer);
 
         cc.exec();
+    } else if (answer.startsWith('https://www.douyu.com/')) {
+        const douyu = new api.Douyu(answer);
+
+        douyu.exec();
     } else if (answer.startsWith('https://www.huya.com/')) {
         const huya = new api.Huya(answer);
 

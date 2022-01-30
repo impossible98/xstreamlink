@@ -1,4 +1,4 @@
-import { _173, _2CQ, _51LM, CC, Huya } from './api/mod';
+import { _173, _2CQ, _51LM, CC, Douyu, Huya } from './api/mod';
 import * as constants from './constants/mod';
 
 export const AppName = constants.AppName;
@@ -9,5 +9,6 @@ export const api = {
     _2CQ,
     _51LM,
     CC,
+    Douyu,
     Huya,
 };
